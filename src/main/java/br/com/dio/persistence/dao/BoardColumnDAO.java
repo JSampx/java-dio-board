@@ -3,7 +3,7 @@ package br.com.dio.persistence.dao;
 import br.com.dio.dto.BoardColumnDTO;
 import br.com.dio.persistence.entity.BoardColumnEntity;
 import br.com.dio.persistence.entity.CardEntity;
-import com.mysql.cj.jdbc.StatementImpl;
+import org.postgresql.jdbc.PgStatement;
 import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
@@ -29,8 +29,8 @@ public class BoardColumnDAO {
             statement.setString(i ++, entity.getKind().name());
             statement.setLong(i, entity.getBoard().getId());
             statement.executeUpdate();
-            if (statement instanceof StatementImpl impl){
-                entity.setId(impl.getLastInsertID());
+            if (statement instanceof PgStatement impl){
+                entity.setId(impl.getLastOID());
             }
             return entity;
         }

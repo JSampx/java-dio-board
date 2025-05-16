@@ -12,9 +12,9 @@ import static lombok.AccessLevel.PRIVATE;
 public final class ConnectionConfig {
 
     public static Connection getConnection() throws SQLException {
-        var url = "jdbc:mysql://localhost/board";
-        var user = "board";
-        var password = "board";
+        var url = "jdbc:postgresql://localhost/board";
+        var user = "postgres";
+        var password = "postgres";
         var connection = DriverManager.getConnection(url, user, password);
         connection.setAutoCommit(false);
         return connection;

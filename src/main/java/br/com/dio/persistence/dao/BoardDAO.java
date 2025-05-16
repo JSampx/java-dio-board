@@ -1,7 +1,7 @@
 package br.com.dio.persistence.dao;
 
 import br.com.dio.persistence.entity.BoardEntity;
-import com.mysql.cj.jdbc.StatementImpl;
+import org.postgresql.jdbc.PgStatement;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
@@ -18,8 +18,8 @@ public class BoardDAO {
         try(var statement = connection.prepareStatement(sql)){
             statement.setString(1, entity.getName());
             statement.executeUpdate();
-            if (statement instanceof StatementImpl impl){
-                entity.setId(impl.getLastInsertID());
+            if (statement instanceof PgStatement impl){
+                entity.setId(impl.getLastOID());
             }
         }
         return entity;

@@ -2,7 +2,7 @@ package br.com.dio.persistence.dao;
 
 import br.com.dio.dto.CardDetailsDTO;
 import br.com.dio.persistence.entity.CardEntity;
-import com.mysql.cj.jdbc.StatementImpl;
+import org.postgresql.jdbc.PgStatement;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
@@ -25,8 +25,8 @@ public class CardDAO {
             statement.setString(i ++, entity.getDescription());
             statement.setLong(i, entity.getBoardColumn().getId());
             statement.executeUpdate();
-            if (statement instanceof StatementImpl impl){
-                entity.setId(impl.getLastInsertID());
+            if (statement instanceof PgStatement impl){
+                entity.setId(impl.getLastOID());
             }
         }
         return entity;
